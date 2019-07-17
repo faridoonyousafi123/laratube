@@ -20,4 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('channels', 'ChannelsController');
-
+Route::resource('channels/{channel}/subscriptions', 'SubscriptionController')->only('destroy', 'store')->middleware('auth');
