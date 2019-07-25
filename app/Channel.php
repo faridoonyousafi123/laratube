@@ -5,6 +5,7 @@ namespace Laratube;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Laratube\Video;
 
 class Channel extends Model implements HasMedia
 
@@ -35,5 +36,9 @@ class Channel extends Model implements HasMedia
 
      public function subscriptions() {
          return $this->hasMany(Subscription::class);
+     }
+
+     public function videos() {
+         return $this->hasMany(Video::class);
      }
 }

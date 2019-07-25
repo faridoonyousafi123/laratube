@@ -1,4 +1,5 @@
 <?php
+use Laratube\Http\Controllers\UploadVideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('channels', 'ChannelsController');
-Route::resource('channels/{channel}/subscriptions', 'SubscriptionController')->only('destroy', 'store')->middleware('auth');
+
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::resource('channels/{channel}/subscriptions', 'SubscriptionController')->only('destroy', 'store');
+    Route::post('channels/{channel}/videos', [UploadVideoController::class, 'store']);
+    Route::get('channels/{channel}/videos', [UploadVideoController::class, 'index'])->name('channel.upload');
+});
